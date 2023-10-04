@@ -39,7 +39,7 @@ public class Graficos {
 
 			break;
 
-		case "Dividir":
+		case "4":
 			
 			double divicion = op.dividir(num1, num2);
 			JOptionPane.showMessageDialog(null,"Divicion " + divicion);
