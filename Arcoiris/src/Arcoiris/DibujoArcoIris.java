@@ -18,7 +18,7 @@ Color[] colores = {Color.WHITE,Color.WHITE, Color.BLUE, VIOLETA,INDIGO,Color.GRE
 public DibujoArcoIris() {
 	setBackground(Color.WHITE);
 }		 
-		 
+		 @Override
 		 public void paintComponent(Graphics g) {
 			 super.paintComponent(g);
 			 

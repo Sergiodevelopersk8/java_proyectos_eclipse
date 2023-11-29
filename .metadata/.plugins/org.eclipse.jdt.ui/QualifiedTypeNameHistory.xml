@@ -4,4 +4,9 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.awt.Graphics"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
+    <fullyQualifiedTypeName name="graphicsObjects.Graphic"/>
+    <fullyQualifiedTypeName name="gui.VisualManager"/>
+    <fullyQualifiedTypeName name="gui.Window"/>
 </qualifiedTypeNameHistroy>
