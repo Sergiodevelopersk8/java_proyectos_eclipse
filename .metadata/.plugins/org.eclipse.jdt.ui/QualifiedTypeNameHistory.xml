@@ -9,4 +9,12 @@
     <fullyQualifiedTypeName name="graphicsObjects.Graphic"/>
     <fullyQualifiedTypeName name="gui.VisualManager"/>
     <fullyQualifiedTypeName name="gui.Window"/>
+    <fullyQualifiedTypeName name="modelo.Raton"/>
+    <fullyQualifiedTypeName name="modelo.Computadora"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.Objects"/>
+    <fullyQualifiedTypeName name="Servicio.IServicioPeliculas"/>
+    <fullyQualifiedTypeName name="Servicio.ServicioPeliculaLista"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="Servicio.ServicioPeliculasArchivos"/>
 </qualifiedTypeNameHistroy>
