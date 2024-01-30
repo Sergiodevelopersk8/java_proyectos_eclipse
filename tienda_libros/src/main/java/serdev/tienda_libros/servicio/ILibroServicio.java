@@ -4,7 +4,7 @@ import java.util.*;
 
 public interface ILibroServicio {
 
-    public List<Libro> listarLibro();
+    public List<Libro> listarLibros();
 public Libro buscarLibroPorId(Integer idLibro);
 public void guardarLibro(Libro libro);
 public void eliminarLibro(Libro libro);
