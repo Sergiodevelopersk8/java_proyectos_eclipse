@@ -37,6 +37,8 @@ public class LibroServicio implements ILibroServicio{
 libroRepositorio.save(libro);
     }
 
+    //public List<Libro> actualizarLibro(){return libroRepositorio.saveAll();}
+
     @Override
     public void eliminarLibro(Libro libro) {
 libroRepositorio.delete((libro));
