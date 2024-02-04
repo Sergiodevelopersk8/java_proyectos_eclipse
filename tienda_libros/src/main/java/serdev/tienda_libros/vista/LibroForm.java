@@ -167,17 +167,42 @@ private void eliminarLibro(){
 
 
 }
+    private void eliminaciondos(){
+        var indice = tablaLibros.getSelectedRow();
+        if (indice != -1){
+            String idindicelibro = tablaLibros.getModel().getValueAt(indice,0).toString();
+            var libro = new Libro();
+            libro.setIdLibro(Integer.parseInt(idindicelibro));
+            libroServicio.eliminarLibro(libro);
+            libroServicio.eliminarLibro(libro);
+            mostrarMnesaje("El libro se elimino");
+            limpiarFormulario();
+            listarLibros();
+        }
+        else{
+            mostrarMnesaje("no se selecciono ningun libro ");
+        }
+
+    }
     private void createUIComponents() {
         // TODO: place custom component creation code here
         //creamos el elemento idTexto oculto
         idTexto = new JTextField("");
         idTexto.setVisible(false);
 
-this.tablaModeloLibros = new DefaultTableModel(0,5);
+this.tablaModeloLibros = new DefaultTableModel(0,5){
+    @Override
+    public boolean isCellEditable(int row, int column){
+        return false;
+    }
+};
+
 String [] cabeceros = {"Id","Libro","Autor","Precio","Existencias"};
     tablaModeloLibros.setColumnIdentifiers(cabeceros);
     //intanciar el objeto jtable
         this.tablaLibros = new JTable(tablaModeloLibros);
+        //evitar seleccionar todos los renglones
+        tablaLibros.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 listarLibros();
 
     }
