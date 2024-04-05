@@ -13,7 +13,7 @@ public class EmpleadoServicio implements IEmpleadoServicio {
     private EmpleadoRepositorio empleadorepositorio;
 
     @Override
-    public List<Empleado> listEmpleados() {
+    public List<Empleado> listarEmpleados() {
         return empleadorepositorio.findAll();
     }
 
