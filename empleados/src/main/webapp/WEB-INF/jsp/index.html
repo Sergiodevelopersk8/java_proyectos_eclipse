@@ -13,6 +13,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Departamento</th>
                 <th scope="col">Sueldo</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -24,6 +25,14 @@
                     <td>
                         <fmt:setLocale value="en_US"/>
                         <fmt:formatNumber type="currency" value="${empleado.sueldo}"/>
+                    </td>
+                    <td class="text-center">
+                        <c:set var="urlEditar">
+                            <c:url value="${application.contextPath}/editar">
+                                <c:param name="idEmpleado" value="${empleado.idEmpleado}"/>
+                            </c:url>
+                        </c:set>
+                        <a href="${urlEditar}" class="btn btn-warning btn-sm me-3">Editar</a>
                     </td>
                 </tr>
             </c:forEach>

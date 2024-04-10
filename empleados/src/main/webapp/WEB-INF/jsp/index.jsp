@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="text-center" style="margin:30px">
-        <h3 style="color: blue"> Sistemas de empleados </h3>
+        <h3 style="color: red"> Sistemas de empleados </h3>
     </div>
     <div class="container">
         <table class="table table-striped table-hover table-bordered align-middle">
@@ -13,6 +13,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Departamento</th>
                 <th scope="col">Sueldo</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +26,23 @@
                         <fmt:setLocale value="en_US"/>
                         <fmt:formatNumber type="currency" value="${empleado.sueldo}"/>
                     </td>
+                    <td class="text-center">
+                        <c:set var="urlEditar">
+                            <c:url value="${application.contextPath}/editar">
+                                <c:param name="idEmpleados" value="${empleado.idEmpleados}"/>
+                            </c:url>
+                        </c:set>
+                        <c:set var="urlEliminar">
+                        <c:url value="${application.contextPath}/eliminar">
+                         <c:param name="idEmpleados" value="${empleado.idEmpleados}"/>
+                           </c:url>
+                             </c:set>
+
+                        <a href="${urlEditar}" class="btn btn-warning btn-sm me-3">Editar</a>
+                         <a href="${urlEliminar}" class="btn btn-danger btn-sm me-3">Eliminar</a>
+
+                    </td>
+
                 </tr>
             </c:forEach>
             </tbody>
