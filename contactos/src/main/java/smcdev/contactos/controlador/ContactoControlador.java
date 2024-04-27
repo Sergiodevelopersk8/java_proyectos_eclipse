@@ -53,6 +53,32 @@ public class ContactoControlador {
         return "editar";
 }
 
+
+
+@PostMapping("/editar")
+    public String editarContacto(@ModelAttribute ("contacto")Contacto contacto){
+        contactoServicio.guardarContacto(contacto);
+
+        return "redirect:/";
+}
+
+
+    @GetMapping("/eliminar/{id}")
+
+    public String mostrarEliminar(@PathVariable(value="id") int idContacto)  {
+        Contacto contacto = new Contacto();
+        contacto.setIdContacto(idContacto);
+        contactoServicio.eliminarContacto(contacto);
+
+
+        return "redirect:/";
+    }
+
+
+
+
+
+
 }
 
 
