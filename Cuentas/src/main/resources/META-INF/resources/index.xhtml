@@ -12,11 +12,92 @@
 <h:body>
 
 <div class="card">
-    <div class="flex justify-content-center flex-wrap card-container blue-container">
-        <h3>Sistema de cuentas bancarias</h3>
+<h:form id="forma-cuentas">
+   <p:growl id="mensajes" showDetail="true"/>
+
+    <div class="card">
+        <p:menubar>
+            <p:menuitem value="Inicio" icon="pi pi-fw pi-user"
+                update=":forma-cuentas:cuentas-tabla" actionListener="#{indexControlador.cargarDatos}"/>
+            <p:menuitem value="Nueva Cuenta" icon="pi pi-fw pi-plus" actionListener="#{indexControlador.agregarCuenta}"
+                        update=":forma-modal:cuenta-ventana"
+                        oncomplete="PF('ventanaModalCuenta').show()" />
+        </p:menubar>
     </div>
 
 
+
+<div class="card">
+    <p:dataTable value="#{indexControlador.cuentas}" var="cuenta" id="cuentas-tabla" widgetVar="cuentastabla">
+     <f:facet name="header">
+         <div class="flex justify-content-center flex-wrap card-container blue-container">
+             <div class="flex align-items-center justify-content-center w-20rem h-4rem bg-blue-500 font-bold-text-white-900 border-round m-2">
+
+             <h3>Sistema de cuentas bancarias</h3>
+             </div>
+         </div>
+     </f:facet>
+        <p:column headerText="Id">
+            <h:outputText value="#{cuenta.idCuenta}"/>
+        </p:column>
+        <p:column headerText="Nombre">
+
+            <h:outputText value="#{cuenta.nombre}"/>
+        </p:column>
+
+        <p:column headerText="Tipo de cuenta">
+
+            <h:outputText value="#{cuenta.tipoCuenta}"/>
+        </p:column>
+
+        <p:column headerText="Saldo">
+
+            <h:outputText value="#{cuenta.saldo}">
+                <f:convertNumber type="currency" currencySymbol="$"/>
+            </h:outputText>
+
+        </p:column>
+
+
+
+
+
+    </p:dataTable>
+
+</div>
+</h:form>
+<h:form id="forma-modal">
+    <p:dialog header="Detalles Cuenta" showEffect="fade" modal="true" widgetVar="ventanaModalCuenta" resposive="true">
+        <p:outputPanel id="cuenta-ventana" class="ui-fluid">
+            <div class="field">
+                <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                <p:inputText id="nombre" value="#{indexControlador.cuentaSeleccionada.nombre}" required="true"/>
+            </div>
+            <div class="field">
+                <p:outputLabel for="tipoCuenta">Tipo Cuenta</p:outputLabel>
+                <p:selectOneMenu id="tipoCuenta" value="#{indexControlador.cuentaSeleccionada.tipoCuenta}">
+                    <f:selectItem itemLabel="Seleccionada" itemValue=""/>
+                    <f:selectItem itemLabel="Ahorro" itemValue="Ahorro"/>
+                    <f:selectItem itemLabel="Credito" itemValue="Credito"/>
+                    <f:selectItem itemLabel="Inversion" itemValue="Inversion"/>
+                </p:selectOneMenu>
+            </div>
+            <div class="field">
+                <p:outputLabel for="saldo">Saldo</p:outputLabel>
+                <p:inputNumber id="saldo" value="#{indexControlador.cuentaSeleccionada.saldo}"/>
+            </div>
+        </p:outputPanel>
+
+        <f:facet name="footer">
+            <p:commandButton value="Guardar" icon="pi pi-check"
+                             process="cuenta-ventana @this"
+                             actionListener="#{indexControlador.guardarCuenta}"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('ventanaModalCuenta').hide()"
+                             class="ui-button-secondary" tyoe="button"/>
+        </f:facet>
+
+    </p:dialog>
+</h:form>
 </div>
 
 
