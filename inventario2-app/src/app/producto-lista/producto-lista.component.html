@@ -11,7 +11,8 @@
                <th scope="col">Descripción del Producto</th>
                <th scope="col">Precio</th>
                <th scope="col">Existencia</th>
-             </tr>
+  <th></th>
+              </tr>
            </thead>
            <tbody>
              <tr *ngFor="let producto of productos">
@@ -20,6 +21,14 @@
                <td>{{producto.descripcion}}</td>
                <td>{{producto.precio}}</td>
                <td>{{producto.existencia}}</td>
+               <td class="text-center">
+                 <div>
+               <button (click)="editarProducto(producto.idProducto)" class="btn btn-warning btn-sm me-3">Editar</button>
+               <button (click)="eliminarProducto(producto.idProducto)" class="btn btn-danger btn-sm ">Eliminar</button>
+                </div>
+
+                   
+              </td>
              </tr>
              
              
