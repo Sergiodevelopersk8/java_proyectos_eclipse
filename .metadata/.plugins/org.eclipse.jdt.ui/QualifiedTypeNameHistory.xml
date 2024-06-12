@@ -19,4 +19,5 @@
     <fullyQualifiedTypeName name="Servicio.ServicioPeliculasArchivos"/>
     <fullyQualifiedTypeName name="interfacesJava.Interface1"/>
     <fullyQualifiedTypeName name="javax.swing.JButton"/>
+    <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 </qualifiedTypeNameHistroy>
