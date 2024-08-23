@@ -1,0 +1,7 @@
+Playstation1
+Playstation2
+Playstation3
+Playstation4
+Playstation5
+psp
+psvita
