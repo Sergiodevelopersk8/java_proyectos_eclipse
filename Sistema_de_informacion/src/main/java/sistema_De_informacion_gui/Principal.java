@@ -108,18 +108,39 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+InventariosFrame inventario;
     private void btninventariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninventariosActionPerformed
-       InventariosFrame inventario = new InventariosFrame();
+       if(inventario == null){
+        inventario = new InventariosFrame();
        ContenedorModulos.add(inventario);
+        ContenedorModulos.getDesktopManager().maximizeFrame(inventario);
        inventario.setVisible(true);
+       }
+       else{
+       ContenedorModulos.getDesktopManager().maximizeFrame(inventario);
+       
+       }
+        
        
     }//GEN-LAST:event_btninventariosActionPerformed
 
+    
+    VentasFrame ventas;
     private void btnventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnventasActionPerformed
-    VentasFrame ventas = new VentasFrame();
+    
+        if(ventas == null){
+        
+        
+     ventas = new VentasFrame();
     ContenedorModulos.add(ventas);
+    ContenedorModulos.getDesktopManager().maximizeFrame(ventas);
     ventas.setVisible(true);
+        }
+        else{
+            ContenedorModulos.getDesktopManager().maximizeFrame(ventas);
+        }
+        
+        
     }//GEN-LAST:event_btnventasActionPerformed
 
     /**
