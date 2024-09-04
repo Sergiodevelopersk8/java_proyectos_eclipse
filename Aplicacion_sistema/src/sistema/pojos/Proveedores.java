@@ -67,6 +67,11 @@ String contactoProveedor;
         this.contactoProveedor = contactoProveedor;
     }
 
-      
+       @Override
+   public String toString(){
+   
+   return this.nomProveedor;
+   
+   }
     
 }

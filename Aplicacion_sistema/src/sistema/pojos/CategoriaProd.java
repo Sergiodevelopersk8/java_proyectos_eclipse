@@ -4,10 +4,6 @@
  */
 package sistema.pojos;
 
-/**
- *
- * @author Draw
- */
 public class CategoriaProd {
 private int idCategoriaProd;
 private String NomCategoriaProd;
@@ -43,6 +39,11 @@ private String DescCategoriaProd;
         this.DescCategoriaProd = DescCategoriaProd;
     }
 
+   @Override
+   public String toString(){
    
+   return this.NomCategoriaProd;
+   
+   }
     
 }
