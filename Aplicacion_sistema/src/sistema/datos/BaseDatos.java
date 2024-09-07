@@ -13,6 +13,7 @@ import com.mysql.cj.xdevapi.SessionFactory;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import  com.mysql.jdbc.Driver;
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -54,20 +55,21 @@ public void insertarProducto(Producto producto)  throws IOException
         
     try {
        conn = DriverManager.getConnection(base,user,user);
-       
-            FileInputStream fis = new FileInputStream(producto.getFotoProducto());
+       File fileFoto = producto.getFotoProducto();
+            FileInputStream fis = new FileInputStream(fileFoto);
        
         String sql = "INSERT INTO cat_productos (id_prod, nombre_prod, desc_prod, "
                 + "stock_prod, foto_prod, unidad_pro, precio_compra, precio_venta_prod, "
-                + "existencias_prod, new_tablecol, fk_id_categoria_prod, fk_id_porveedor)"
-                + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "existencias_prod,  fk_id_categoria_prod, fk_id_porveedor)"
+                + "values(?,?,?,?,?,?,?,?,?,?,?);";
         st = conn.prepareStatement(sql);
         
         st.setString(1, producto.getIdProducto());
         st.setString(2, producto.getNomProducto());
         st.setString(3,producto.getDescProducto());
         st.setDouble(4,producto.getStockProducto());
-        st.setBinaryStream(5, fis, (int)producto.getFotoProducto().length());
+        long sizefoto = fileFoto.length();
+        st.setBinaryStream(5, fis, sizefoto);
         st.setString(6,producto.getUnidadProducto());
         st.setDouble(7,producto.getPrecioCompraProducto());
         st.setDouble(8,producto.getPrecioVentaProducto());
@@ -413,10 +415,9 @@ return categoriaprodlist;
 
 
 
-
 /*public static void main (String[] args){
 
- CategoriaProd categoria = new CategoriaProd(1,"Categoria de prueba", "Descripcion de la categoria de pruieba");
+ CategoriaProd categoria = new CategoriaProd(1,"Productos de mininos", "limpieza de mininos");
  BaseDatos base = new BaseDatos();
  
  base.InsertarCategoriaProducto(categoria);
