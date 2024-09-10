@@ -359,7 +359,7 @@ public class ProductoFrame extends javax.swing.JDialog {
        base.insertarProducto(producto);
           
    JOptionPane.showMessageDialog(this,"El producto se guardo con exito");
-
+this.dispose();
       
       }
      catch(Exception error){
