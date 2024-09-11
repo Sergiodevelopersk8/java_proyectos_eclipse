@@ -134,7 +134,7 @@ public void insertarProveedores(Proveedores proveedor){
         st.setString(1,proveedor.getNomProveedor());
         st.setString(2,proveedor.getDirProveedor());
         st.setString(3,proveedor.getTelefonoProveedor());
-        st.setString(2,proveedor.getEmailProveedor());
+        st.setString(4,proveedor.getEmailProveedor());
         st.setString(5,proveedor.getContactoProveedor());
          st.executeUpdate();
     } catch (SQLException ex) {

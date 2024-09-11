@@ -18,6 +18,14 @@ String contactoProveedor;
         this.emailProveedor = emailProveedor;
         this.contactoProveedor = contactoProveedor;
     }
+    public Proveedores(String nomProveedor, String dirProveedor, String telefonoProveedor, String emailProveedor, String contactoProveedor) {
+        this.idProveedor = idProveedor;
+        this.nomProveedor = nomProveedor;
+        this.dirProveedor = dirProveedor;
+        this.telefonoProveedor = telefonoProveedor;
+        this.emailProveedor = emailProveedor;
+        this.contactoProveedor = contactoProveedor;
+    }
 
     public int getIdProveedor() {
         return idProveedor;
