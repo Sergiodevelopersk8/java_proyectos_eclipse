@@ -117,7 +117,11 @@ int IdProveedor;
     }
  
 
+@Override
+public String toString(){
+return this.idProducto;
 
+}
 
 
 }

@@ -49,6 +49,34 @@ public BaseDatos() {
 
 }
 
+
+public void actualizarInventario(Producto producto, double cantidad){
+
+ try {
+    conn = DriverManager.getConnection(base,user,user);
+   
+    String sql = "UPDATE cat_productos SET existencias_prod = ? WHERE id_prod = ?";
+        st = conn.prepareStatement(sql);
+        st.setDouble(1,cantidad);
+        st.setString(2,producto.getIdProducto());
+        st.executeUpdate();
+    } catch (SQLException ex) {
+          ex.printStackTrace();
+    }
+finally{
+    try {
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+}
+
+
+
+
 public void insertarProducto(Producto producto)  throws IOException
       
     {
@@ -210,7 +238,7 @@ public ArrayList<Producto> ObtenerProductos(){
     ArrayList <Producto> listaProductos = new ArrayList<Producto>(); 
  try {
        conn = DriverManager.getConnection(base,user,user);
-        String sql = "SELECT * FROM cat_productos";
+        String sql = "SELECT * FROM cat_productos order by nombre_prod";
         st = conn.prepareStatement(sql);
 
          rs = st.executeQuery();
@@ -220,10 +248,10 @@ public ArrayList<Producto> ObtenerProductos(){
              String nombre = rs.getString("nombre_prod");
              String descripcion = rs.getString("desc_prod");
              double stock = rs.getDouble("stock_prod");
-             String unidad = rs.getString("unidad_prod");
-             double precioCompra = rs.getDouble("precio_compra_prod");
+             String unidad = rs.getString("unidad_pro");
+             double precioCompra = rs.getDouble("precio_compra");
              double precioVenta = rs.getDouble("precio_venta_prod");
-             double existencias = rs.getDouble("existencia_prod");
+             double existencias = rs.getDouble("existencias_prod");
              int idCategoria = rs.getInt("fk_id_categoria_prod");
              int idProveedor = rs.getInt("fk_id_porveedor");
              
