@@ -96,7 +96,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        campoBuscar = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         jToggleButton1 = new javax.swing.JToggleButton();
@@ -208,8 +208,14 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         jLabel6.setText("Buscar:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(40, 290, 38, 16);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(40, 330, 178, 30);
+
+        campoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoBuscarKeyReleased(evt);
+            }
+        });
+        getContentPane().add(campoBuscar);
+        campoBuscar.setBounds(40, 330, 178, 30);
 
         jScrollPane3.setViewportView(jScrollPane2);
 
@@ -277,6 +283,55 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnagregarExistenciaActionPerformed
 
+    private void campoBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyReleased
+        limpiarTabla();
+        
+        String cadenaBusqueda = campoBuscar.getText();
+        ArrayList<Producto> listaProductos = base.obtenerProductosPorCriterio(cadenaBusqueda);
+        
+        int numeroProductos = listaProductos.size();
+        modeloTabla.setNumRows(numeroProductos);
+        for(int i = 0; i < numeroProductos; i++){
+        
+            Producto producto = listaProductos.get(i);
+            String clave = producto.getIdProducto();
+            String nombre = producto.getNomProducto();
+            String unidad = producto.getUnidadProducto();
+            Double precioCompra = producto.getPrecioCompraProducto();
+            Double precioVenta = producto.getPrecioVentaProducto();
+            Double existencia = producto.getExistenciasProducto();
+            
+            modeloTabla.setValueAt(producto, i, 0);
+            modeloTabla.setValueAt(nombre, i, 1);
+            modeloTabla.setValueAt(unidad, i, 2);
+            modeloTabla.setValueAt(precioCompra, i, 3);
+            modeloTabla.setValueAt(precioVenta, i, 4);
+            modeloTabla.setValueAt(existencia, i, 5);
+        
+        
+        
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_campoBuscarKeyReleased
+
+    
+    public void limpiarTabla(){
+    
+        int numFilas = modeloTabla.getRowCount();
+        if(numFilas > 0){
+        
+        for(int i = numFilas - 1; i >= 0; i-- ){
+    modeloTabla.removeRow(i);
+        
+        }
+    }
+        
+    }
+    
+    
     
     public void Mensajes(String mensaje){
     
@@ -289,6 +344,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnProveedor;
     private javax.swing.JButton btnagregarExistencia;
     private javax.swing.JTextField campoAgregarEXISTENCIA;
+    private javax.swing.JTextField campoBuscar;
     private javax.swing.JTextField campoClave;
     private javax.swing.JTextField campoExistencia;
     private javax.swing.JTextField campoNombre;
@@ -304,7 +360,6 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JLabel lblImagen;
