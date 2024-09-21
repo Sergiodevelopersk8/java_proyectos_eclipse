@@ -4,7 +4,13 @@
  */
 package Aplicacion_sistema_gui;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.*;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -93,8 +99,8 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         campoAgregarEXISTENCIA = new javax.swing.JTextField();
         btnagregarExistencia = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnModificarProd = new javax.swing.JButton();
+        btnBorrarProd = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         campoBuscar = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -197,13 +203,23 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         getContentPane().add(btnagregarExistencia);
         btnagregarExistencia.setBounds(410, 252, 72, 30);
 
-        jButton5.setText("jButton5");
-        getContentPane().add(jButton5);
-        jButton5.setBounds(600, 370, 88, 86);
+        btnModificarProd.setText("Modificar");
+        btnModificarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarProdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnModificarProd);
+        btnModificarProd.setBounds(600, 370, 88, 86);
 
-        jButton6.setText("jButton6");
-        getContentPane().add(jButton6);
-        jButton6.setBounds(600, 470, 88, 82);
+        btnBorrarProd.setText("Borrar");
+        btnBorrarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarProdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBorrarProd);
+        btnBorrarProd.setBounds(600, 470, 88, 82);
 
         jLabel6.setText("Buscar:");
         getContentPane().add(jLabel6);
@@ -244,7 +260,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_campoNombreActionPerformed
 
     private void btnNuevoArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoArticuloActionPerformed
-        ProductoFrame articulo = new ProductoFrame(null,true);
+        ProductoFrame articulo = new ProductoFrame(null,true, null, null, "Nuevo producto", false);
         articulo.setVisible(true);
         articulo.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         articulo.setLocation(600,150);
@@ -317,6 +333,61 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_campoBuscarKeyReleased
 
+    private void btnModificarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProdActionPerformed
+
+        String nombreProducto = productoSeleccionado.getNomProducto();
+        ImageIcon imagenProducto = null;
+        ProductoFrame frameProd = null;
+        int opcion = JOptionPane.showConfirmDialog(this,"¿Estas seguro de modificar el articulo " + nombreProducto + " ?");
+         if(opcion == 0){
+        try{
+        
+        InputStream is = base.buscarFoto(productoSeleccionado);
+        BufferedImage bi = ImageIO.read(is);
+        imagenProducto = new ImageIcon(bi);
+        
+        
+      frameProd = new ProductoFrame(null,true, productoSeleccionado, imagenProducto, "Actualizar producto", true);
+      frameProd.setVisible(true);  
+        if(frameProd != null){
+        JOptionPane.showMessageDialog(this,"estoy en la linea 353");
+            if(frameProd.getInformacion()!= " "){
+            cargarModeloTable();
+        JOptionPane.showMessageDialog(this,"estoy en la linea 356");
+            
+            }
+        
+        }
+        }
+        
+        
+        catch(IOException ex){
+        ex.printStackTrace();
+        
+        }
+        }
+        
+
+        
+    }//GEN-LAST:event_btnModificarProdActionPerformed
+
+    private void btnBorrarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarProdActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Estas seguro de borara el producto?");
+        
+        if(opcion == 0){
+        
+        modeloTabla.removeRow(tablaProductos.getSelectedRow());
+
+        base.borrarProducto(productoSeleccionado);
+
+
+
+        
+        }
+        
+        
+    }//GEN-LAST:event_btnBorrarProdActionPerformed
+
     
     public void limpiarTabla(){
     
@@ -339,7 +410,9 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrarProd;
     private javax.swing.JButton btnCategoria;
+    private javax.swing.JButton btnModificarProd;
     private javax.swing.JButton btnNuevoArticulo;
     private javax.swing.JButton btnProveedor;
     private javax.swing.JButton btnagregarExistencia;
@@ -348,8 +421,6 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField campoClave;
     private javax.swing.JTextField campoExistencia;
     private javax.swing.JTextField campoNombre;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

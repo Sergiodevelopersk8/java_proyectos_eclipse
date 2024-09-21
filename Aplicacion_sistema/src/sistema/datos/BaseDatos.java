@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import  com.mysql.jdbc.Driver;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import sistema.pojos.CategoriaProd;
@@ -501,9 +502,154 @@ return categoriaprodlist;
 
 
 
+public void borrarProducto(Producto producto){
+
+ try {
+       conn = DriverManager.getConnection(base,user,user);
+       
+        String sql = "DELETE FROM cat_productos WHERE id_prod = ?";
+        prepSt = conn.prepareStatement(sql);
+        
+        prepSt.setString(1, producto.getIdProducto());
+       
+        
+        prepSt.executeUpdate();
+        
+        
+        
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    
+    finally{
+        try {
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    
+    }
 
 
 
+
+
+}
+
+
+public InputStream buscarFoto(Producto producto){
+InputStream streamFoto = null;
+    
+    try{
+    
+             conn = DriverManager.getConnection(base,user,user);
+                
+        String sql = "SELECT foto_prod FROM cat_productos WHERE id_prod = ?";
+        prepSt = conn.prepareStatement(sql);
+        
+        prepSt.setString(1, producto.getIdProducto());
+       
+        rs = prepSt.executeQuery();
+        while(rs.next()){
+        
+        streamFoto = rs.getBinaryStream("foto_prod");
+        
+        }
+        
+    }
+    
+    catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+    
+    return streamFoto;
+    
+
+}
+
+
+public void actualizarProducto(Producto producto, boolean cambiarFoto){
+
+try{
+
+    conn = DriverManager.getConnection(base,user,user);
+    
+    if(cambiarFoto == true){
+    File fileFoto = producto.getFotoProducto();
+    FileInputStream fis = new FileInputStream(fileFoto);
+    
+    
+    String sql = "UPDATE cat_productos SET desc_prod = ?, stock_prod = ?, "
+            + "foto_prod = ?, unidad_pro = ?, precio_compra = ?, precio_venta_prod = ?, "
+            + "fk_id_categoria_prod = ?, fk_id_porveedor = ? "
+            + "WHERE id_prod = ? ";
+    
+    prepSt = conn.prepareStatement(sql);
+        prepSt.setString(1,producto.getDescProducto());
+        prepSt.setDouble(2,producto.getStockProducto());
+        long sizefoto = fileFoto.length();
+        prepSt.setBinaryStream(3,fis, sizefoto);
+        prepSt.setString(4,producto.getUnidadProducto());
+        prepSt.setDouble(5,producto.getPrecioCompraProducto());
+        prepSt.setDouble(6,producto.getPrecioVentaProducto());
+        prepSt.setInt(7,producto.getIdCategoria());
+        prepSt.setInt(8,producto.getIdProveedor());
+        prepSt.setString(9, producto.getIdProducto());
+    System.out.print("estoy en el cambiar la foto es true " + "\n"+ prepSt);
+   
+    }
+    
+    else{
+    String sql = "UPDATE cat_productos SET desc_prod = ?, stock_prod = ?, unidad_pro = ?,"
+            + " precio_compra = ?, precio_venta_prod = ?, "
+            + "fk_id_categoria_prod = ?, fk_id_porveedor = ?"
+            + " WHERE id_prod = ? ";
+    prepSt = conn.prepareStatement(sql);
+     prepSt.setString(1,producto.getDescProducto());
+     prepSt.setDouble(2,producto.getStockProducto());
+          
+    prepSt.setString(3,producto.getUnidadProducto());
+    prepSt.setDouble(4,producto.getPrecioCompraProducto());
+    prepSt.setDouble(5,producto.getPrecioVentaProducto());
+    prepSt.setInt(6,producto.getIdCategoria());
+    prepSt.setInt(7,producto.getIdProveedor());
+    prepSt.setString(8, producto.getIdProducto());
+    
+     System.out.print("estoy en el else de no actualizar la foto " + "\n"+ prepSt);
+    
+    
+    
+    
+    }
+    
+    
+}
+
+
+
+
+catch(Exception ex){
+
+System.out.print("el error es " + ex);
+
+}
+
+}
+
+
+public void Mensaje(String mensaje){
+
+System.out.print(mensaje);
+
+
+}
+public void Mensaje2(String mensaje, Object obj){
+
+System.out.print(mensaje + obj);
+
+
+}
 
 
 /*public static void main (String[] args){

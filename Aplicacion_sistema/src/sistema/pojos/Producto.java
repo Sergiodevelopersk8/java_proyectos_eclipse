@@ -14,7 +14,9 @@ double existenciasProducto;
 int IdCategoria;
 int IdProveedor;
 
-    public Producto(String idProducto, String nomProducto, String descProducto, double stockProducto, File fotoProducto, String unidadProducto, double precioCompraProducto, double precioVentaProducto, double existenciasProducto, int IdCategoria, int IdProveedor) {
+    public Producto(String idProducto, String nomProducto, String descProducto, double stockProducto, File fotoProducto,
+            String unidadProducto, double precioCompraProducto, 
+            double precioVentaProducto, double existenciasProducto, int IdCategoria, int IdProveedor) {
         this.idProducto = idProducto;
         this.nomProducto = nomProducto;
         this.descProducto = descProducto;
