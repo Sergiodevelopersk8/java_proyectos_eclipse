@@ -200,6 +200,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campoBuscar">
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoBuscarActionPerformed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoBuscarKeyReleased"/>
       </Events>
       <Constraints>
@@ -262,7 +263,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tablaProductos.getSelectionModel().addListSelectionListener(&#xd;&#xa;&#xd;&#xa;new ListSelectionListener(){&#xd;&#xa;public void valueChanged(ListSelectionEvent event){&#xd;&#xa;    &#xd;&#xa;    if(!event.getValueIsAdjusting() &amp;&amp; (tablaProductos.getSelectedRow()&gt;= 0)){&#xd;&#xa;    int filaSeleccionada = tablaProductos.getSelectedRow();&#xd;&#xa;    Producto producto = (Producto)modeloTabla.getValueAt(filaSeleccionada, 0);&#xd;&#xa;campoNombre.setText(producto.getNomProducto());&#xd;&#xa;campoClave.setText(producto.getIdProducto());&#xd;&#xa;String existencias = String.valueOf(producto.getExistenciasProducto());&#xd;&#xa;campoExistencia.setText(existencias);&#xd;&#xa;productoSeleccionado = producto;&#xd;&#xa;    }&#xd;&#xa;&#xd;&#xa;    }        &#xd;&#xa;  }&#xd;&#xa;&#xd;&#xa;);&#xd;&#xa;&#xd;&#xa;"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tablaProductos.getSelectionModel().addListSelectionListener(&#xd;&#xa;&#xd;&#xa;new ListSelectionListener(){&#xd;&#xa;public void valueChanged(ListSelectionEvent event){&#xd;&#xa;    &#xd;&#xa;    if(!event.getValueIsAdjusting() &amp;&amp; (tablaProductos.getSelectedRow()&gt;= 0)){&#xd;&#xa;    int filaSeleccionada = tablaProductos.getSelectedRow();&#xd;&#xa;    Producto producto = (Producto)modeloTabla.getValueAt(filaSeleccionada, 1);&#xd;&#xa;    campoNombre.setText(producto.getNomProducto());&#xd;&#xa;    campoClave.setText(producto.getIdProducto());&#xd;&#xa;    String existencias = String.valueOf(producto.getExistenciasProducto());&#xd;&#xa;    campoExistencia.setText(existencias);&#xd;&#xa;    productoSeleccionado = producto;&#xd;&#xa;    }&#xd;&#xa;&#xd;&#xa;    }        &#xd;&#xa;  }&#xd;&#xa;&#xd;&#xa;);&#xd;&#xa;&#xd;&#xa;"/>
             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="InventariosFrame_tablaProductos"/>
           </AuxValues>
         </Component>

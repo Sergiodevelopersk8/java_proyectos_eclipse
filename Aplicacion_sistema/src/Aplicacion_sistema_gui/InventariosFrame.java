@@ -116,7 +116,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
 
                     if(!event.getValueIsAdjusting() && (tablaProductos.getSelectedRow()>= 0)){
                         int filaSeleccionada = tablaProductos.getSelectedRow();
-                        Producto producto = (Producto)modeloTabla.getValueAt(filaSeleccionada, 0);
+                        Producto producto = (Producto)modeloTabla.getValueAt(filaSeleccionada, 1);
                         campoNombre.setText(producto.getNomProducto());
                         campoClave.setText(producto.getIdProducto());
                         String existencias = String.valueOf(producto.getExistenciasProducto());
@@ -225,6 +225,11 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(40, 290, 38, 16);
 
+        campoBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoBuscarActionPerformed(evt);
+            }
+        });
         campoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 campoBuscarKeyReleased(evt);
@@ -317,8 +322,8 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
             Double precioVenta = producto.getPrecioVentaProducto();
             Double existencia = producto.getExistenciasProducto();
             
-            modeloTabla.setValueAt(producto, i, 0);
-            modeloTabla.setValueAt(nombre, i, 1);
+            modeloTabla.setValueAt(clave, i, 0);
+            modeloTabla.setValueAt(producto, i, 1);
             modeloTabla.setValueAt(unidad, i, 2);
             modeloTabla.setValueAt(precioCompra, i, 3);
             modeloTabla.setValueAt(precioVenta, i, 4);
@@ -387,6 +392,10 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_btnBorrarProdActionPerformed
+
+    private void campoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoBuscarActionPerformed
 
     
     public void limpiarTabla(){
