@@ -4,8 +4,11 @@
  */
 package Aplicacion_sistema_gui;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sistema.datos.BaseDatos;
 import sistema.pojos.Producto;
@@ -17,7 +20,23 @@ import sistema.pojos.Producto;
 public class VentasFrame extends javax.swing.JInternalFrame {
 
     BaseDatos base = new BaseDatos();
-    DefaultTableModel modeloTablaProductos = new DefaultTableModel();
+    DefaultTableModel modeloTablaProductos = new DefaultTableModel(){
+    
+    
+    @Override
+    public boolean isCellEditable(int row, int column){
+    
+    return false;
+    }
+    
+    
+    
+    };
+    
+    
+    
+    
+    
     DefaultListModel <Producto> modeloListaProductos = new DefaultListModel<Producto>();
     
     /**
@@ -80,6 +99,11 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         getContentPane().setLayout(null);
 
         TablaVentas.setModel(modeloTablaProductos);
+        TablaVentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TablaVentasKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(TablaVentas);
 
         getContentPane().add(jScrollPane1);
@@ -163,9 +187,14 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         lblImagen.setBounds(52, 45, 437, 161);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(829, 16, 495, 206);
+        jPanel2.setBounds(829, 16, 0, 0);
 
         listaBusquedas.setModel(modeloListaProductos);
+        listaBusquedas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                listaBusquedasMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(listaBusquedas);
 
         getContentPane().add(jScrollPane2);
@@ -191,9 +220,16 @@ public class VentasFrame extends javax.swing.JInternalFrame {
     
     private void campoBuscarPorductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarPorductoKeyReleased
     limpiarListaProductos();
-        
-        String cadenaBusqueda = campoBuscarPorducto.getText();
-        ArrayList<Producto> listaProductos = base.obtenerProductosPorCriterio(cadenaBusqueda);
+    
+    String cadenaBusqueda = campoBuscarPorducto.getText();
+
+    if(cadenaBusqueda.isEmpty()){
+    
+       limpiarListaProductos();
+    
+    }
+    else{
+     ArrayList<Producto> listaProductos = base.obtenerProductosPorCriterio(cadenaBusqueda);
         
       
         for(Producto prod: listaProductos){
@@ -201,10 +237,62 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         modeloListaProductos.addElement(prod);
         
         }
+    
+    }
+    
+       
         
         
     }//GEN-LAST:event_campoBuscarPorductoKeyReleased
 
+    private void listaBusquedasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaBusquedasMousePressed
+      JList list = (JList)evt.getSource();
+      
+      if(evt.getClickCount()== 2){
+      int index = list.locationToIndex(evt.getPoint());
+      System.out.println("El indice es : " + index);
+      Producto product = (Producto)list.getSelectedValue();
+      System.out.println("El producto es : " + product);
+      
+      AddProductoaVenta(product);
+      
+      
+      
+      }
+      
+      
+      
+    }//GEN-LAST:event_listaBusquedasMousePressed
+
+    private void TablaVentasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TablaVentasKeyReleased
+        if(evt.getKeyCode()== KeyEvent.VK_F2){
+        
+            int filaSeleccionada = TablaVentas.getSelectedRow();
+            String cantidad = JOptionPane.showInputDialog("Modificar cantidad:");
+            String precioVenta = (String)modeloTablaProductos.getValueAt(filaSeleccionada, 2);
+            double importe = Double.parseDouble(cantidad) * Double.parseDouble(precioVenta);
+            String importeString = String.valueOf(importe);
+        modeloTablaProductos.setValueAt(cantidad,filaSeleccionada,3);
+        modeloTablaProductos.setValueAt(importeString,filaSeleccionada,4);
+        }
+    }//GEN-LAST:event_TablaVentasKeyReleased
+
+    
+    private void AddProductoaVenta(Producto prod)
+    {
+    
+    String claveProducto = prod.getIdProducto();
+    String nombreProducto = prod.getNomProducto();
+    String precioVenta = String.valueOf(prod.getPrecioVentaProducto());
+    String importe = String.valueOf(prod.getPrecioVentaProducto());
+    
+    String [] datosProducto = {claveProducto,nombreProducto,precioVenta,"1",importe};
+    modeloTablaProductos.addRow(datosProducto);
+    
+    
+    
+    }
+    
     
     
     private void limpiarListaProductos(){

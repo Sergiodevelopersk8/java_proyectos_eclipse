@@ -283,14 +283,14 @@ public class ProductoFrame extends javax.swing.JDialog {
 
     private void btnGuardarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarProductoActionPerformed
    
-        String codigo = campoClave.getText();
-      String nombre = campoNombre.getText();
-      String descripcion = campoDescripcion.getText();
-      String stockstr = campoStock.getText();
-      String precioComprastr  = campoPrecioCompra.getText();
-      String precioVentasstr  = campoPrecioVentas.getText();
+        String codigo = campoClave.getText().toLowerCase();
+      String nombre = campoNombre.getText().toLowerCase();
+      String descripcion = campoDescripcion.getText().toLowerCase();
+      String stockstr = campoStock.getText().toLowerCase();
+      String precioComprastr  = campoPrecioCompra.getText().toLowerCase();
+      String precioVentasstr  = campoPrecioVentas.getText().toLowerCase();
       double stock = 0, precioCompra = 0,precioVentas = 0;
-       String unidad = comboUnidades.getSelectedItem().toString();
+       String unidad = comboUnidades.getSelectedItem().toString().toLowerCase();
       CategoriaProd categorias = (CategoriaProd)ComboCategorias.getSelectedItem();
       Proveedores proveedores = (Proveedores)ComboProveedores.getSelectedItem();
       
