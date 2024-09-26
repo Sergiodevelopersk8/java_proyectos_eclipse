@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import sistema.datos.BaseDatos;
 import sistema.pojos.Producto;
@@ -36,18 +38,43 @@ public class VentasFrame extends javax.swing.JInternalFrame {
     
     
     
-    
     DefaultListModel <Producto> modeloListaProductos = new DefaultListModel<Producto>();
     
     /**
-     * Creates new form Ventas
+     * constructor
      */
     public VentasFrame() {
         initComponents();
         cargarColumnasTabla();
-       
+       cargarListenerModeloTabla();
     }
 
+    
+    private void cargarListenerModeloTabla(){
+    
+    modeloTablaProductos.addTableModelListener(new TableModelListener(){
+    
+    @Override
+    public void tableChanged(TableModelEvent e){
+    int numFilas =  modeloTablaProductos.getRowCount();
+    double sumatoria = 0;
+    for(int i = 0; i< numFilas; i++){
+    
+    String importe = (String) modeloTablaProductos.getValueAt(i, 4);
+    sumatoria += Double.parseDouble(importe);
+    
+    }
+    lblsumatoria.setText(String.valueOf(sumatoria));
+    
+    }
+    
+    });
+    
+    
+    }
+    
+    
+    
     
     private void cargarColumnasTabla(){
     
@@ -175,6 +202,11 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         jPanel1.setBounds(843, 251, 408, 362);
 
         btnCancelarVenta.setText("Cancelar venta");
+        btnCancelarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVentaActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnCancelarVenta);
         btnCancelarVenta.setBounds(192, 554, 115, 55);
 
@@ -205,6 +237,11 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         btnCortedia.setBounds(350, 30, 240, 50);
 
         btnQuitarProducto.setText("Quitar Producto");
+        btnQuitarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarProductoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnQuitarProducto);
         btnQuitarProducto.setBounds(50, 550, 120, 60);
 
@@ -276,6 +313,38 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         modeloTablaProductos.setValueAt(importeString,filaSeleccionada,4);
         }
     }//GEN-LAST:event_TablaVentasKeyReleased
+
+    private void btnQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarProductoActionPerformed
+        int filaSeleccionada = TablaVentas.getSelectedRow();
+        int cantidadfilas = modeloTablaProductos.getRowCount();
+        if(cantidadfilas > 0){
+        int opcion = JOptionPane.showConfirmDialog(this,"Estas Seguro de borarr el producto");
+        if(opcion == 0){
+        modeloTablaProductos.removeRow(filaSeleccionada);
+        
+        
+        }//fin del if de la opcion
+        
+        }// fin del if de cantidad de filas 
+    }//GEN-LAST:event_btnQuitarProductoActionPerformed
+
+    private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
+        int cantidadFilas = modeloTablaProductos.getRowCount();
+          int cantidadfilas = modeloTablaProductos.getRowCount();
+        if(cantidadfilas > 0){
+          
+          int opcion = JOptionPane.showConfirmDialog(this,"Estas Seguro de cancelar la venta");
+if(opcion == 0 ){
+
+        for(int i = cantidadFilas - 1 ; i >=0; i--){
+        
+        modeloTablaProductos.removeRow(i);
+        
+        
+        }//fin del for
+}//fin del if de la opcion
+        }//fin del if de cantidad de filas 
+    }//GEN-LAST:event_btnCancelarVentaActionPerformed
 
     
     private void AddProductoaVenta(Producto prod)
