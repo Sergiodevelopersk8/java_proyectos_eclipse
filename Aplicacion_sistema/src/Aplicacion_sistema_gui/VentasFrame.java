@@ -6,6 +6,8 @@ package Aplicacion_sistema_gui;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -13,7 +15,9 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import sistema.datos.BaseDatos;
+import sistema.pojos.DetalleVenta;
 import sistema.pojos.Producto;
+import sistema.pojos.Venta;
 
 /**
  *
@@ -164,6 +168,11 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         btnRealizarVenta.setBackground(new java.awt.Color(204, 0, 0));
         btnRealizarVenta.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnRealizarVenta.setText("Realizar Venta");
+        btnRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarVentaActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setText("Pago con :");
@@ -346,6 +355,52 @@ if(opcion == 0 ){
         }//fin del if de cantidad de filas 
     }//GEN-LAST:event_btnCancelarVentaActionPerformed
 
+    private void btnRealizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVentaActionPerformed
+        
+       ArrayList <DetalleVenta> detalles = new ArrayList<DetalleVenta>(); 
+        String sumatoriaStr = lblsumatoria.getText();
+       double montoVenta = Double.parseDouble(sumatoriaStr);
+       
+       
+       
+       //obtenemos la fecha actual y creamos un objeto date sql
+         // Obtiene la instancia del calendario
+        Calendar calendarioLocal = Calendar.getInstance();
+        
+        // Obtiene la fecha actual
+        java.util.Date fechaActual = calendarioLocal.getTime();
+        
+        // Convierte la fecha a milisegundos
+        long fechaMilisegundos = fechaActual.getTime();
+        
+        // Crea un objeto java.sql.Date usando los milisegundos
+        java.sql.Date fecha = new java.sql.Date(fechaMilisegundos);
+       Venta venta = new Venta(montoVenta, fecha);
+       Long idventa = base.InsertarVenta(venta);
+       
+       int numRows = modeloTablaProductos.getRowCount();
+       
+       for(int i = 0; i< numRows; i++){
+       
+       String idProducto = (String) modeloTablaProductos.getValueAt(i, 0);
+       String cantidadStr = (String) modeloTablaProductos.getValueAt(i, 3);
+       double cantidad = Double.parseDouble(cantidadStr);
+       DetalleVenta detalle = new DetalleVenta(idventa,idProducto,cantidad);
+       base.InsertardetallesVentas(detalle);
+       
+       detalles.add(detalle);
+       }
+       
+         for(int i = numRows - 1 ; i >=0; i--){
+        
+        modeloTablaProductos.removeRow(i);
+        
+        
+        }//fin del for
+       lblsumatoria.setText("0.0");
+    }//GEN-LAST:event_btnRealizarVentaActionPerformed
+
+    
     
     private void AddProductoaVenta(Producto prod)
     {

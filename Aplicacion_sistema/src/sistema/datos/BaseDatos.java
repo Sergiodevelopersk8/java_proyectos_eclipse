@@ -245,22 +245,38 @@ public void insertarProveedores(Proveedores proveedor){
 }
 
 
-public void InsertarVenta (Venta ventas){
+public Long InsertarVenta (Venta ventas){
 
+      Long lastVal = 0l;
   try {
      conn = DriverManager.getConnection(base,user,user);
-    // Session session = new SessionFactory().getSession(base);    
+      
      String sql = "INSERT INTO ventas ( monto_venta, fecha_venta)"
                 + "VALUES (?,?)";
         prepSt = conn.prepareStatement(sql);
         prepSt.setDouble(1,ventas.getMontoVenta());
         prepSt.setDate(2,ventas.getFechaVenta());
-         prepSt.executeUpdate();
+        prepSt.executeUpdate();
+        prepSt.close();
+      prepSt = this.conn.prepareStatement("SELECT LAST_INSERT_ID()");
+
+// Ejecuta la consulta
+rs = prepSt.executeQuery();
+
+while (rs.next()) {
+    // Obtén el valor de la columna generada
+    lastVal = rs.getLong(1);  // LAST_INSERT_ID() devuelve un valor sin nombre, por lo que se usa el índice de la columna
+}
+
+        
+        
+         
     } catch (SQLException ex) {
          ex.printStackTrace();
     }
     finally{
     try {
+        rs.close();
             st.close();
             conn.close();
         } catch (SQLException ex) {
@@ -268,7 +284,7 @@ public void InsertarVenta (Venta ventas){
         }
     }
 
-
+ return lastVal;
 }
 
 
@@ -276,11 +292,11 @@ public void InsertardetallesVentas(DetalleVenta detalle){
 
  try {
        conn = DriverManager.getConnection(base,user,user);
-        String sql = "INSERT INTO detalle_venta ( fk_id_venta, fk_id_prod, cantidad_vendida)"
+        String sql = "INSERT INTO detall_venta ( id_venta, id_prod, cantidad_vendida)"
                 + "VALUES (?,?,?)";
         prepSt = conn.prepareStatement(sql);
-        prepSt.setInt(1,detalle.getIdDetalleVenta());
-        prepSt.setInt(2,detalle.getIdProd());
+        prepSt.setLong(1,detalle.getIdVenta());
+        prepSt.setString(2,detalle.getIdProd());
         prepSt.setDouble(3,detalle.getCantidadVendida());
          prepSt.executeUpdate();
     } catch (SQLException ex) {
@@ -426,8 +442,8 @@ ArrayList <DetalleVenta> detalleventalist = new ArrayList<DetalleVenta>();
          while(rs.next()){
              /* , , */
              int id = rs.getInt("id_detalle_venta");
-             int idventa = rs.getInt("fk_id_venta");
-             int idprod = rs.getInt("fk_id_prod");
+             Long idventa = rs.getLong("fk_id_venta");
+             String idprod = rs.getString("fk_id_prod");
              double cantidadvendida = rs.getDouble("cantidad_vendida");
              DetalleVenta detalleventa = new DetalleVenta(id,idventa,idprod,cantidadvendida);
              
@@ -652,14 +668,9 @@ System.out.print(mensaje + obj);
 }
 
 
-/*public static void main (String[] args){
 
- CategoriaProd categoria = new CategoriaProd(1,"Productos de mininos", "limpieza de mininos");
- BaseDatos base = new BaseDatos();
- 
- base.InsertarCategoriaProducto(categoria);
 
-}*/
+
 
 
 

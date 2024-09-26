@@ -14,6 +14,13 @@ private Date fechaVenta;
         this.montoVenta = montoVenta;
         this.fechaVenta = fechaVenta;
     }
+    
+    
+        public Venta( double montoVenta, Date fechaVenta) {
+        
+        this.montoVenta = montoVenta;
+        this.fechaVenta = fechaVenta;
+    }
 
     public int getIdVenta() {
         return idVenta;

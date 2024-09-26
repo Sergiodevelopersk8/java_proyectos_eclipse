@@ -3,12 +3,18 @@ package sistema.pojos;
 public class DetalleVenta {
 
 private int idDetalleVenta;
-private int idVenta;
-private int idProd;
+private Long idVenta;
+private String idProd;
 private double cantidadVendida;
 
-    public DetalleVenta(int idDetalleVenta, int idVenta, int idProd, double cantidadVendida) {
+    public DetalleVenta(int idDetalleVenta, Long idVenta, String idProd, double cantidadVendida) {
         this.idDetalleVenta = idDetalleVenta;
+        this.idVenta = idVenta;
+        this.idProd = idProd;
+        this.cantidadVendida = cantidadVendida;
+    }
+    
+     public DetalleVenta( Long idVenta, String idProd, double cantidadVendida) {
         this.idVenta = idVenta;
         this.idProd = idProd;
         this.cantidadVendida = cantidadVendida;
@@ -22,19 +28,19 @@ private double cantidadVendida;
         this.idDetalleVenta = idDetalleVenta;
     }
 
-    public int getIdVenta() {
+    public Long getIdVenta() {
         return idVenta;
     }
 
-    public void setIdVenta(int idVenta) {
+    public void setIdVenta(Long idVenta) {
         this.idVenta = idVenta;
     }
 
-    public int getIdProd() {
+    public String getIdProd() {
         return idProd;
     }
 
-    public void setIdProd(int idProd) {
+    public void setIdProd(String idProd) {
         this.idProd = idProd;
     }
 
