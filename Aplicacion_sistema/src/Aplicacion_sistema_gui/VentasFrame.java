@@ -361,7 +361,17 @@ if(opcion == 0 ){
         String sumatoriaStr = lblsumatoria.getText();
        double montoVenta = Double.parseDouble(sumatoriaStr);
        
-       
+       String pagoConStr = campoPagacon.getText();
+
+       double cambio = 0;
+       if(!pagoConStr.isEmpty()){
+           
+           double montoPago = Double.parseDouble(pagoConStr);
+           cambio = montoPago - montoVenta;
+           
+       }
+
+
        
        //obtenemos la fecha actual y creamos un objeto date sql
          // Obtiene la instancia del calendario
@@ -398,6 +408,16 @@ if(opcion == 0 ){
         
         }//fin del for
        lblsumatoria.setText("0.0");
+       
+       if(!pagoConStr.isEmpty()){
+       JOptionPane.showMessageDialog(this,"<html><h1 style='font-size:200 px; color:blue;'>" + cambio+ " </h1></html>", "usted debe de dar este cambio: ",1);
+       
+        campoPagacon.setText("");
+       
+       
+       }
+       
+       
     }//GEN-LAST:event_btnRealizarVentaActionPerformed
 
     
