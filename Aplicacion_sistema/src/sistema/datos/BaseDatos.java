@@ -562,11 +562,12 @@ InputStream streamFoto = null;
              conn = DriverManager.getConnection(base,user,user);
                 
         String sql = "SELECT foto_prod FROM cat_productos WHERE id_prod = ?";
-        prepSt = conn.prepareStatement(sql);
         
+        prepSt = conn.prepareStatement(sql);
         prepSt.setString(1, producto.getIdProducto());
        
         rs = prepSt.executeQuery();
+        
         while(rs.next()){
         
         streamFoto = rs.getBinaryStream("foto_prod");
@@ -612,7 +613,6 @@ try{
         prepSt.setInt(7,producto.getIdCategoria());
         prepSt.setInt(8,producto.getIdProveedor());
         prepSt.setString(9, producto.getIdProducto());
-    System.out.print("estoy en el cambiar la foto es true " + "\n"+ prepSt);
    
     }
     
@@ -632,13 +632,12 @@ try{
     prepSt.setInt(7,producto.getIdProveedor());
     prepSt.setString(8, producto.getIdProducto());
     
-     System.out.print("estoy en el else de no actualizar la foto " + "\n"+ prepSt);
     
     
     
     
     }
-    
+      prepSt.executeUpdate();
     
 }
 

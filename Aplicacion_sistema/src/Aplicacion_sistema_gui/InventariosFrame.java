@@ -47,7 +47,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     //carga el modelo de la tabla de inventario
     public void cargarModeloTable(){
         
-      
+       limpiarTabla();
         
         ArrayList<Producto> listaProductos =  base.ObtenerProductos();
     
@@ -64,8 +64,8 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
             Double precioVenta = producto.getPrecioVentaProducto();
             Double existencias = producto.getExistenciasProducto();
             
-            modeloTabla.setValueAt(producto,i,0);
-            modeloTabla.setValueAt(nombre,i,1);
+            modeloTabla.setValueAt(clave,i,0);
+            modeloTabla.setValueAt(producto,i,1);
             modeloTabla.setValueAt(unidad,i,2);
             modeloTabla.setValueAt(precioCompra,i,3);
             modeloTabla.setValueAt(precioVenta,i,4);
@@ -77,6 +77,39 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         
         
     }
+    
+    
+    private void desplegarFoto(Producto producto){
+    
+    ImageIcon imagenProducto = null;
+        
+    try{
+        /*obteber image*/
+    
+        InputStream is = base.buscarFoto(producto);
+        BufferedImage bi = ImageIO.read(is);
+        imagenProducto = new ImageIcon(bi);
+        lblImagen.setIcon(imagenProducto);
+        
+        
+        }
+    
+    
+    catch(IOException ex){
+    
+    ex.printStackTrace();
+    
+    }
+    
+    
+    
+    
+    
+    }
+    
+    
+    
+    
     
     
     
@@ -92,7 +125,6 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         campoNombre = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
         lblImagen = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         campoExistencia = new javax.swing.JTextField();
@@ -109,12 +141,11 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         jToggleButton2 = new javax.swing.JToggleButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
+
         tablaProductos.getSelectionModel().addListSelectionListener(
-
-            new ListSelectionListener(){
-                public void valueChanged(ListSelectionEvent event){
-
-                    if(!event.getValueIsAdjusting() && (tablaProductos.getSelectedRow()>= 0)){
+            new ListSelectionListener() {
+                public void valueChanged(ListSelectionEvent event) {
+                    if (!event.getValueIsAdjusting() && (tablaProductos.getSelectedRow()>= 0)) {//This line prevents double events
                         int filaSeleccionada = tablaProductos.getSelectedRow();
                         Producto producto = (Producto)modeloTabla.getValueAt(filaSeleccionada, 1);
                         campoNombre.setText(producto.getNomProducto());
@@ -122,11 +153,11 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
                         String existencias = String.valueOf(producto.getExistenciasProducto());
                         campoExistencia.setText(existencias);
                         productoSeleccionado = producto;
-                    }
-
-                }        
+                        //despliegue la foto del producto
+                        desplegarFoto(producto);
+                    }            
+                }
             }
-
         );
 
         setTitle("Inventarios");
@@ -177,10 +208,8 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         });
         getContentPane().add(campoNombre);
         campoNombre.setBounds(255, 178, 172, 31);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(718, 227, 50, 44);
         getContentPane().add(lblImagen);
-        lblImagen.setBounds(494, 119, 218, 124);
+        lblImagen.setBounds(598, 14, 440, 310);
 
         jLabel4.setText("Existencia");
         getContentPane().add(jLabel4);
@@ -439,7 +468,6 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JLabel lblImagen;

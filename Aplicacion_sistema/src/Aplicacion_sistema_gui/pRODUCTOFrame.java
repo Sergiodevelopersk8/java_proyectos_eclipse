@@ -204,11 +204,11 @@ public class ProductoFrame extends javax.swing.JDialog {
             }
         });
         getContentPane().add(btnGuardarProducto);
-        btnGuardarProducto.setBounds(20, 600, 127, 36);
+        btnGuardarProducto.setBounds(20, 590, 127, 36);
 
         jButton3.setText("Cancelar");
         getContentPane().add(jButton3);
-        jButton3.setBounds(165, 600, 127, 36);
+        jButton3.setBounds(160, 590, 127, 36);
 
         ComboProveedores.setModel(modeloProveedor);
         getContentPane().add(ComboProveedores);
@@ -406,10 +406,8 @@ this.dispose();
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               
-                //ProductoFrame dialog = new ProductoFrame(new javax.swing.JFrame(),true);
-                //ProductoFrame dialog = new ProductoFrame(java.awt.Frame parent, boolean modal, Producto producto, ImageIcon icon, String titulo, boolean actualizado);
-                ProductoFrame dialog = new ProductoFrame(new javax.swing.JFrame(),true, null, null, "producto", true);
+                //ProductoFrame dialog = new ProductoFrame(new javax.swing.JFrame(),true, null, null, "producto", true);
+                ProductoFrame dialog = new ProductoFrame(new javax.swing.JFrame(), true, null, null, null, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

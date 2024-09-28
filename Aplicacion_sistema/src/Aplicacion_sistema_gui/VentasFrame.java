@@ -125,6 +125,7 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         listaBusquedas = new javax.swing.JList<>();
         btnCortedia = new javax.swing.JButton();
         btnQuitarProducto = new javax.swing.JButton();
+        imagenlbl = new javax.swing.JLabel();
 
         setTitle("Ventas");
         getContentPane().setLayout(null);
@@ -253,6 +254,8 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnQuitarProducto);
         btnQuitarProducto.setBounds(50, 550, 120, 60);
+        getContentPane().add(imagenlbl);
+        imagenlbl.setBounds(770, 50, 290, 170);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -462,6 +465,7 @@ if(opcion == 0 ){
     private javax.swing.JButton btnRealizarVenta;
     private javax.swing.JTextField campoBuscarPorducto;
     private javax.swing.JTextField campoPagacon;
+    private javax.swing.JLabel imagenlbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
