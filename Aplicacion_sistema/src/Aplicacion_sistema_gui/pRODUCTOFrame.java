@@ -56,7 +56,19 @@ public class ProductoFrame extends javax.swing.JDialog {
     
     private void cargarProducto(Producto producto, ImageIcon icono){
     
-    lblImagenArticulo.setIcon(icono);
+        //redimencionar la imagen
+            Image imgProd = icono.getImage();
+        int anchoEtiqueta = lblImagenArticulo.getWidth();
+        int altoEtiqueta = lblImagenArticulo.getHeight();
+        
+        Image imgRedimencionada = imgProd.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_DEFAULT);
+        
+        
+        ImageIcon iconRedimensionado = new ImageIcon(imgRedimencionada);
+        
+        
+        
+    lblImagenArticulo.setIcon(iconRedimensionado);
     String clave = producto.getIdProducto();
     String nombre = producto.getNomProducto();
     String descripcion = producto.getDescProducto();
@@ -269,8 +281,8 @@ public class ProductoFrame extends javax.swing.JDialog {
      imgArticleFile = chooser.getSelectedFile();
     ImageIcon icono = new ImageIcon(imgArticleFile.getAbsolutePath());
     Image imagen = icono.getImage();
-    imagen.getScaledInstance(anchoImage, altoImage, Image.SCALE_DEFAULT);
-    ImageIcon iconoRedimensionado = new ImageIcon(imagen);
+    Image  imagenRedimencionada = imagen.getScaledInstance(anchoImage, altoImage, Image.SCALE_DEFAULT);
+    ImageIcon iconoRedimensionado = new ImageIcon(imagenRedimencionada);
     
     lblImagenArticulo.setIcon(iconoRedimensionado);
     

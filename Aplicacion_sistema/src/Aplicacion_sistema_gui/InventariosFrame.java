@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package Aplicacion_sistema_gui;
-
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,7 +90,18 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         InputStream is = base.buscarFoto(producto);
         BufferedImage bi = ImageIO.read(is);
         imagenProducto = new ImageIcon(bi);
-        lblImagen.setIcon(imagenProducto);
+        
+        Image imgProd = imagenProducto.getImage();
+        int anchoEtiqueta = lblImagen.getWidth();
+        int altoEtiqueta = lblImagen.getHeight();
+        
+        Image imgRedimencionada = imgProd.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_DEFAULT);
+        
+        
+        ImageIcon iconRedimensionado = new ImageIcon(imgRedimencionada);
+        
+        
+        lblImagen.setIcon(iconRedimensionado);
         
         
         }
@@ -163,29 +175,49 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         setTitle("Inventarios");
         getContentPane().setLayout(null);
 
+        btnNuevoArticulo.setToolTipText("Nuevo Producto");
+        btnNuevoArticulo.setPreferredSize(new java.awt.Dimension(134, 134));
+        ImageIcon iconBtnNuevoArticulo = new ImageIcon("images/Nuevo-articulo.png");
+        Image imgBtnNuevoArticulo = iconBtnNuevoArticulo.getImage();
+
+        Dimension prefSizeBtnNuevoArticulo = btnNuevoArticulo.getPreferredSize();
+
+        int anchoBtnNuevoArticulo = (int)(prefSizeBtnNuevoArticulo.getWidth()* 0.6);
+        int altoBtnNuevoArticulo = (int)(prefSizeBtnNuevoArticulo.getHeight()* 0.6);
+
+        Image imgRedimBtnNuevoArticulo = imgBtnNuevoArticulo.getScaledInstance(anchoBtnNuevoArticulo, altoBtnNuevoArticulo, Image.SCALE_DEFAULT);
+        ImageIcon iconRedimBtnNuevoArticulo = new ImageIcon(imgRedimBtnNuevoArticulo);
+
+        btnNuevoArticulo.setIcon(iconRedimBtnNuevoArticulo);
         btnNuevoArticulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoArticuloActionPerformed(evt);
             }
         });
         getContentPane().add(btnNuevoArticulo);
-        btnNuevoArticulo.setBounds(6, 6, 106, 85);
+        btnNuevoArticulo.setBounds(6, 6, 120, 100);
 
+        btnCategoria.setToolTipText("Nueva Categoria");
+        btnCategoria.setPreferredSize(new java.awt.Dimension(134, 134));
+        btnCategoria.setIcon(new ImageIcon(new ImageIcon("images/Nueva-categoria.png").getImage().getScaledInstance((int)(btnCategoria.getPreferredSize().getWidth()*0.7), (int)(btnCategoria.getPreferredSize().getHeight()*0.7), java.awt.Image.SCALE_DEFAULT)));
         btnCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCategoriaActionPerformed(evt);
             }
         });
         getContentPane().add(btnCategoria);
-        btnCategoria.setBounds(166, 6, 104, 85);
+        btnCategoria.setBounds(166, 6, 120, 100);
 
+        btnProveedor.setToolTipText("Nuevo Proveedor");
+        btnProveedor.setPreferredSize(new java.awt.Dimension(134, 134));
+        btnProveedor.setIcon(new ImageIcon(new ImageIcon("images/proveedores.png").getImage().getScaledInstance((int)(btnProveedor.getPreferredSize().getWidth()*0.7), (int)(btnProveedor.getPreferredSize().getHeight()*0.7), java.awt.Image.SCALE_DEFAULT)));
         btnProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProveedorActionPerformed(evt);
             }
         });
         getContentPane().add(btnProveedor);
-        btnProveedor.setBounds(343, 6, 104, 85);
+        btnProveedor.setBounds(343, 6, 120, 100);
         getContentPane().add(campoClave);
         campoClave.setBounds(42, 178, 140, 31);
 
@@ -233,6 +265,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         btnagregarExistencia.setBounds(410, 252, 72, 30);
 
         btnModificarProd.setText("Modificar");
+        btnModificarProd.setPreferredSize(new java.awt.Dimension(88, 88));
         btnModificarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarProdActionPerformed(evt);
@@ -242,6 +275,7 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
         btnModificarProd.setBounds(600, 370, 88, 86);
 
         btnBorrarProd.setText("Borrar");
+        btnBorrarProd.setPreferredSize(new java.awt.Dimension(88, 88));
         btnBorrarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBorrarProdActionPerformed(evt);
@@ -384,10 +418,10 @@ public class InventariosFrame extends javax.swing.JInternalFrame {
       frameProd = new ProductoFrame(null,true, productoSeleccionado, imagenProducto, "Actualizar producto", true);
       frameProd.setVisible(true);  
         if(frameProd != null){
-        JOptionPane.showMessageDialog(this,"estoy en la linea 353");
+       
             if(frameProd.getInformacion()!= " "){
             cargarModeloTable();
-        JOptionPane.showMessageDialog(this,"estoy en la linea 356");
+       
             
             }
         

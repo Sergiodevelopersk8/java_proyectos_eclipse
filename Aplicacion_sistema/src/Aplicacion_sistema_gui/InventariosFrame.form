@@ -25,32 +25,59 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnNuevoArticulo">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Nuevo Producto"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[134, 134]"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoArticuloActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ImageIcon iconBtnNuevoArticulo = new ImageIcon(&quot;images/Nuevo-articulo.png&quot;);&#xd;&#xa;Image imgBtnNuevoArticulo = iconBtnNuevoArticulo.getImage();&#xd;&#xa;&#xd;&#xa;Dimension prefSizeBtnNuevoArticulo = btnNuevoArticulo.getPreferredSize();&#xd;&#xa;&#xd;&#xa;int anchoBtnNuevoArticulo = (int)(prefSizeBtnNuevoArticulo.getWidth()* 0.6);&#xd;&#xa;int altoBtnNuevoArticulo = (int)(prefSizeBtnNuevoArticulo.getHeight()* 0.6);&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;Image imgRedimBtnNuevoArticulo = imgBtnNuevoArticulo.getScaledInstance(anchoBtnNuevoArticulo, altoBtnNuevoArticulo, Image.SCALE_DEFAULT);&#xd;&#xa;ImageIcon iconRedimBtnNuevoArticulo = new ImageIcon(imgRedimBtnNuevoArticulo);&#xd;&#xa;&#xd;&#xa;btnNuevoArticulo.setIcon(iconRedimBtnNuevoArticulo);"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="6" y="6" width="106" height="85"/>
+          <AbsoluteConstraints x="6" y="6" width="120" height="100"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="btnCategoria">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Nueva Categoria"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[134, 134]"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCategoriaActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnCategoria.setIcon(new ImageIcon(new ImageIcon(&quot;images/Nueva-categoria.png&quot;).getImage().getScaledInstance((int)(btnCategoria.getPreferredSize().getWidth()*0.7), (int)(btnCategoria.getPreferredSize().getHeight()*0.7), java.awt.Image.SCALE_DEFAULT)));"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="166" y="6" width="104" height="85"/>
+          <AbsoluteConstraints x="166" y="6" width="120" height="100"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="btnProveedor">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Nuevo Proveedor"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[134, 134]"/>
+        </Property>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProveedorActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="btnProveedor.setIcon(new ImageIcon(new ImageIcon(&quot;images/proveedores.png&quot;).getImage().getScaledInstance((int)(btnProveedor.getPreferredSize().getWidth()*0.7), (int)(btnProveedor.getPreferredSize().getHeight()*0.7), java.awt.Image.SCALE_DEFAULT)));"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="343" y="6" width="104" height="85"/>
+          <AbsoluteConstraints x="343" y="6" width="120" height="100"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -158,10 +185,16 @@
     <Component class="javax.swing.JButton" name="btnModificarProd">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[88, 88]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificarProdActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="InventariosFrame_btnModificarProd"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="600" y="370" width="88" height="86"/>
@@ -171,6 +204,9 @@
     <Component class="javax.swing.JButton" name="btnBorrarProd">
       <Properties>
         <Property name="text" type="java.lang.String" value="Borrar"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[88, 88]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrarProdActionPerformed"/>

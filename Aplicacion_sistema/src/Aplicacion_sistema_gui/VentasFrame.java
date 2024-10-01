@@ -4,11 +4,17 @@
  */
 package Aplicacion_sistema_gui;
 
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.TableModelEvent;
@@ -264,7 +270,43 @@ public class VentasFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoBuscarPorductoActionPerformed
 
+     private void desplegarFoto(Producto producto){
     
+    ImageIcon imagenProducto = null;
+        
+    try{
+        /*obteber image*/
+    
+        InputStream is = base.buscarFoto(producto);
+        BufferedImage bi = ImageIO.read(is);
+        imagenProducto = new ImageIcon(bi);
+        
+           Image imgProd = imagenProducto.getImage();
+        int anchoEtiqueta = imagenlbl.getWidth();
+        int altoEtiqueta = imagenlbl.getHeight();
+        
+        Image imgRedimencionada = imgProd.getScaledInstance(anchoEtiqueta, altoEtiqueta, Image.SCALE_DEFAULT);
+        
+        
+        ImageIcon iconRedimensionado = new ImageIcon(imgRedimencionada);
+        
+        imagenlbl.setIcon(iconRedimensionado);
+        
+        
+        }
+    
+    
+    catch(IOException ex){
+    
+    ex.printStackTrace();
+    
+    }
+    
+    
+    
+    
+    
+    }
     
     
     private void campoBuscarPorductoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarPorductoKeyReleased
@@ -304,7 +346,7 @@ public class VentasFrame extends javax.swing.JInternalFrame {
       System.out.println("El producto es : " + product);
       
       AddProductoaVenta(product);
-      
+      desplegarFoto(product);
       
       
       }
