@@ -1,0 +1,73 @@
+use db_sistema;
+create table cat_categorias(
+id_categoria_prod int auto_increment primary key,
+nom_categoria_prod varchar(25) unique,
+desc_categoria_prod varchar(50)
+);
+
+create table cat_proveedores(
+id_proveedor int auto_increment primary key,
+nom_proveedor varchar(25),
+dir_proveedor varchar(25),
+telefono_proveedor varchar(15),
+email_proveedor varchar(20),
+contacto_proveedor varchar(30)
+);
+
+create table ventas(
+id_venta int auto_increment primary key,
+monto_venta numeric(8),
+fecha_venta date
+);
+
+CREATE TABLE `db_sistema`.`cat_productos` (
+  `id_prod` VARCHAR(25) NOT NULL,
+  `nombre_prod` VARCHAR(25) NOT NULL,
+  `desc_prod` VARCHAR(50) NULL,
+  `stock_prod` DECIMAL(8) NULL,
+  `foto_prod` BLOB NULL,
+  `unidad_pro` VARCHAR(15) NULL,
+  `precio_compra` DECIMAL(8) NULL,
+  `precio_venta_prod` DECIMAL(8) NULL,
+  `existencias_prod` DECIMAL(6) NULL,
+ 
+  `fk_id_categoria_prod` INT NULL,
+  `fk_id_porveedor` INT NULL,
+  PRIMARY KEY (`id_prod`),
+  UNIQUE INDEX `id_prod_UNIQUE` (`id_prod` ASC) VISIBLE,
+  UNIQUE INDEX `nombre_prod_UNIQUE` (`nombre_prod` ASC) VISIBLE,
+  INDEX `id_categoria_prod_fk_idx` (`fk_id_categoria_prod` ASC) VISIBLE,
+  INDEX `id_proveedor_fk_idx` (`fk_id_porveedor` ASC) VISIBLE,
+  CONSTRAINT `id_categoria_prod_fk`
+    FOREIGN KEY (`fk_id_categoria_prod`)
+    REFERENCES `db_sistema`.`cat_categorias` (`id_categoria_prod`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `id_proveedor_fk`
+    FOREIGN KEY (`fk_id_porveedor`)
+    REFERENCES `db_sistema`.`cat_proveedores` (`id_proveedor`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+CREATE TABLE detall_venta (
+    id_detalle_venta INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT, -- Cambié id_ventas por id_venta para que coincida con la tabla ventas
+    id_prod VARCHAR(25), -- Cambié id_productos por id_prod para que coincida con la tabla cat_productos
+    cantidad_vendida NUMERIC(8) NOT NULL,
+    CONSTRAINT fk_id_venta FOREIGN KEY (id_venta) REFERENCES ventas (id_venta),
+    CONSTRAINT fk_id_prod FOREIGN KEY (id_prod) REFERENCES cat_productos (id_prod)
+);
+
+insert into cat_proveedores (nom_proveedor, dir_proveedor, telefono_proveedor, email_proveedor, contacto_proveedor)
+values("sergio","mexico","225255","sergio@mail.com","telefono");
+
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM ventas;
+SET SQL_SAFE_UPDATES = 1;
+DELETE FROM ventas WHERE id_venta IS NOT NULL;
+
+
+SELECT * FROM cat_productos;
+
+
+
